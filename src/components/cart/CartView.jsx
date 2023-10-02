@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useCartContext } from "../../context/CartContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CartView = () => {
     const { cartList, getTotalItems, getTotalPrice, removeProduct, clearCart } =

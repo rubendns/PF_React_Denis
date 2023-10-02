@@ -1,4 +1,3 @@
-// ItemDetail.jsx
 import React from "react";
 import { ItemCounter } from "./ItemCounter";
 import { useCartContext } from "../../context/CartContext";

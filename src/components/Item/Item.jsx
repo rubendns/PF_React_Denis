@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const Item = ({ product }) => {
-  //   console.log(product);
+
     return (
         <div className="producto">
         <img src={product.imagen} />
