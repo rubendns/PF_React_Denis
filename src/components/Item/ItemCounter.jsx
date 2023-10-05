@@ -1,55 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const ItemCounter = ({ stock, onAdd }) => {
-    const [counter, setCounter] = useState(1);
-    const navigate = useNavigate();
+const ItemCounter = ({ stock, onAdd }) => {
+  const [counter, setCounter] = useState(1);
+  const [productAvailable, setProductAvailable] = useState(stock > 0);
+  const navigate = useNavigate();
 
-    const handleIncrement = () => {
-        if (counter < stock) {
-        setCounter(counter + 1);
-        }
-    };
+  useEffect(() => {
+    setProductAvailable(stock > 0);
+  }, [stock]);
 
-    const handleDecrement = () => {
-        if (counter > 1) {
-        setCounter(counter - 1);
-        }
-    };
+  const handleIncrement = () => {
+    if (counter < stock) {
+      setCounter(prevCounter => prevCounter + 1);
+    }
+  };
 
-    const handleAddToCart = () => {
-        onAdd(counter);
-    };
+  const handleDecrement = () => {
+    if (counter > 1) {
+      setCounter(prevCounter => prevCounter - 1);
+    }
+  };
 
-    const handleBuyNow = () => {
-        onAdd(counter);
-        navigate("/cart-view");
-    };
+  const handleAction = () => {
+    if (productAvailable) {
+      onAdd(counter);
+    } else {
+      alert("¡Lo siento, este producto está agotado!");
+    }
+  };
 
-    return (
-        <>
-        <h2>Seleccione cantidad</h2>
-        <button onClick={handleDecrement}> - </button>
-        <strong> {counter} </strong>
-        <button onClick={handleIncrement}> + </button>
-        <br />
-        <button onClick={handleAddToCart}>
-            <label>
-            <strong>Agregar al carrito</strong>
-            </label>
-        </button>
-        <br />
-        <button onClick={handleBuyNow}>
-            <label>
-            <strong>Comprar ahora</strong>
-            </label>
-        </button>
-        <br />
-        <button onClick={() => navigate(-1)}>
-            <label>
-            <strong>Volver Atrás</strong>
-            </label>
-        </button>
-        </>
-    );
+  return (
+    <>
+      <h2>Seleccione cantidad</h2>
+      <button onClick={handleDecrement} disabled={!productAvailable}> - </button>
+      <strong> {counter} </strong>
+      <button onClick={handleIncrement} disabled={counter >= stock}> + </button>
+      <br />
+      <button onClick={handleAction} disabled={!productAvailable && counter === 1}>
+        <strong>{productAvailable ? "Agregar al carrito" : "Producto Agotado"}</strong>
+      </button>
+      <br />
+      <button onClick={() => navigate(-1)}>
+        <strong>Volver Atrás</strong>
+      </button>
+    </>
+  );
 };
+
+export default ItemCounter;

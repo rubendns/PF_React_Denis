@@ -1,6 +1,5 @@
-import React from "react";
-import { ItemCounter } from "./ItemCounter";
 import { useCartContext } from "../../context/CartContext";
+import ItemCounter from './ItemCounter';
 
 const ItemDetail = ({ item }) => {
   const { addProduct } = useCartContext();
@@ -17,6 +16,7 @@ const ItemDetail = ({ item }) => {
         <p>Modelo: {item.modelo}</p>
         <p>Descripcion: {item.descripcion}</p>
         <p>Precio: ${item.precio}</p>
+        <p>Stock: {item.stock}</p>
       </div>
       <div>
         <ItemCounter stock={item.stock} onAdd={onAdd} />

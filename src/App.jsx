@@ -7,7 +7,7 @@ import Contacto from "./components/contact/Contact";
 import ItemDetailContainer from "./components/Item/ItemDetailContainer";
 import ItemListContainer from "./components/Item/ItemListContainer";
 import { CartContextProvider } from "./context/CartContext";
-import CartView from "./components/Cart/CartView";
+import CartView from "./components/cart/CartView";
 import { initFirebase } from './firebase/config';
 
 initFirebase()
@@ -22,8 +22,6 @@ function App() {
             <Routes>
                 <Route path="/" element={<ItemListContainer />} />
                 <Route path="/item/:id" element={<ItemDetailContainer />} />
-                <Route path="/marca/:marca" element={<ItemListContainer />} />
-                <Route path="/marca/:marca" element={<ItemListContainer />} />
                 <Route path="/marca/:marca" element={<ItemListContainer />} />
                 <Route path="/contacto" element={<Contacto />} />
                 <Route path="/cart-view" element={<CartView />} />
