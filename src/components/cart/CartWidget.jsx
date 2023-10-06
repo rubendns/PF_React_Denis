@@ -8,8 +8,8 @@ const CartWidget = () => {
   return (
     <div className="nav-item">
       <button>
-        <Link to="/cart-view" className="btn btn-primary mx-4">
-        <i className="bi bi-cart-fill me-2"></i> Ir al carrito 🛒 | {cartList.length}
+        <Link to="/cart-view" >
+        <i></i> Ir al carrito 🛒 | {cartList.length}
       </Link>
       </button>
     </div>

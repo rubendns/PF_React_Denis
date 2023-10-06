@@ -25,17 +25,34 @@ const ItemCounter = ({ stock, onAdd }) => {
   const handleAction = () => {
     if (productAvailable) {
       onAdd(counter);
-    } else {
-      alert("¡Lo siento, este producto está agotado!");
-    }
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer)
+          toast.addEventListener("mouseleave", Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
+        icon: "success",
+        title: "Se agrego al carrito.."
+      })
+    } 
   };
 
   return (
     <>
       <h2>Seleccione cantidad</h2>
-      <button onClick={handleDecrement} disabled={!productAvailable}> - </button>
+      <button onClick={handleDecrement} disabled={!productAvailable}>
+        - 
+      </button>
       <strong> {counter} </strong>
-      <button onClick={handleIncrement} disabled={counter >= stock}> + </button>
+      <button onClick={handleIncrement} disabled={counter >= stock}>
+        + 
+      </button>
       <br />
       <button onClick={handleAction} disabled={!productAvailable && counter === 1}>
         <strong>{productAvailable ? "Agregar al carrito" : "Producto Agotado"}</strong>

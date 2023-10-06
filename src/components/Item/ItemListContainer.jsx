@@ -24,7 +24,9 @@ const ItemListContainer = () => {
         
     }, [marca])
 
-    return <div>{<ItemList products={products} />}</div>;
+    return <div>
+                {<ItemList products={products} />}
+            </div>;
 };
 
 export default ItemListContainer;
