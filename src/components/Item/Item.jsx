@@ -5,8 +5,8 @@ const Item = ({ product }) => {
     return (
         <div className="producto">
         <img src={product.imagen} />
-        <p>Modelo: {product.modelo}</p>
-        <p>Precio: ${product.precio}</p>
+        <p><u>Modelo:</u> {product.modelo}</p>
+        <p><u>Precio:</u> ${product.precio}</p>
         <Link className="ver-mas" to={`/item/${product.id}`}>
             Ver más
         </Link>

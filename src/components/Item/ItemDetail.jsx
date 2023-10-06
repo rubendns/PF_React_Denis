@@ -12,11 +12,12 @@ const ItemDetail = ({ item }) => {
     <div className="col">
       <h2>Detalle del producto</h2>
       <div className="item">
+        
         <img className="item" src={item.imagen} alt="imagen" />
-        <p>Modelo: {item.modelo}</p>
-        <p>Descripcion: {item.descripcion}</p>
-        <p>Precio: ${item.precio}</p>
-        <p>Stock: {item.stock}</p>
+        <p><u>Modelo:</u> {item.modelo}</p>
+        <p><u>Descripcion:</u> {item.descripcion}</p>
+        <p><u>Precio</u>: ${item.precio}</p>
+        <p><u>Stock:</u> {item.stock}</p>
       </div>
       <div>
         <ItemCounter stock={item.stock} onAdd={onAdd} />

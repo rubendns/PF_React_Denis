@@ -105,7 +105,7 @@ const CartView = () => {
                 <>
                     <h2>Carrito de Compras</h2>
                     {cartList.length === 0 ? (
-                        <p>El carrito está vacío</p>
+                        <h3><strong>El carrito está vacío</strong></h3>
                     ) : (
                         <>
                             <ul>
@@ -117,8 +117,8 @@ const CartView = () => {
                                     </li>
                                 ))}
                             </ul>
-                            <p>Total de artículos: {getTotalItems()}</p>
-                            <p>Total a pagar: ${getTotalPrice()}</p>
+                            <p className="cart-view">Total de artículos: {getTotalItems()}</p>
+                            <p className="cart-view">Total a pagar: ${getTotalPrice()}</p>
                             <button onClick={() => setShowCheckout(true)}>Finalizar compra</button>
                             <button onClick={handleClearCart}>Vaciar Carrito</button>
                         </>
@@ -128,19 +128,18 @@ const CartView = () => {
                 <div>
                     <h3>Resumen de la Compra</h3>
                     <ul>{}</ul>
-                    <p>Total a pagar: ${getTotalPrice() || 0}</p>
-
-                    <form>
+                    <h3>Total a pagar: ${getTotalPrice() || 0}</h3>
+                    <form className="contenedor-form">
                         <label> Nombre:{" "}
-                            <input placeholder="Ingrese su nombre" type="text" name="name" value={formData.name} onChange={handleNameChange} required/>
+                            <input placeholder="Ingrese su nombre" type="text" value={formData.name} onChange={handleNameChange} required/>
                         </label>
                         <br />
                         <label> Teléfono:{" "}
-                            <input placeholder="Ingrese su teléfono" type="tel" name="phone" value={formData.phone} onChange={handlePhoneChange} required/>
+                            <input placeholder="Ingrese su teléfono" type="number" value={formData.phone} onChange={handlePhoneChange} required/>
                         </label>
                         <br />
                         <label> Correo Electrónico:{" "}
-                            <input placeholder="Ingrese su email" type="email" name="email" value={formData.email} onChange={handleEmailChange} required/>
+                            <input placeholder="Ingrese su email" type="email" value={formData.email} onChange={handleEmailChange} required/>
                         </label>
                         <br />
                         <button type="button" onClick={handleCheckout} disabled={!areAllFieldsCompleted}>
