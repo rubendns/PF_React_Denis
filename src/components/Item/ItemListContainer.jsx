@@ -15,11 +15,25 @@ const ItemListContainer = () => {
             const queryFilter = query(queryCollection, where("marca", "==", marca.toLowerCase()))
             getDocs(queryFilter)
             .then(resp => setProducts(resp.docs.map(prod => ({id: prod.id, ...prod.data()}))))
-            .catch((err) => console.log(err));
+            .catch((err) =>  {
+                console.error(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al cargar productos',
+                    text: 'Hubo un problema al cargar los productos. Por favor, inténtalo de nuevo.',
+                });
+            });
         } else{ 
             getDocs(queryCollection)
             .then(resp => setProducts(resp.docs.map(prod => ({id: prod.id, ...prod.data()}))))
-            .catch((err) => console.log(err));
+            .catch((err) =>  {
+                console.error(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al cargar productos',
+                    text: 'Hubo un problema al cargar los productos. Por favor, inténtalo de nuevo.',
+                });
+            });
         }
         
     }, [marca])
