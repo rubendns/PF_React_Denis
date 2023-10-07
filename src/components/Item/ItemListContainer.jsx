@@ -5,14 +5,14 @@ import ItemList from "./ItemList";
 
 const ItemListContainer = () => {
     const [products, setProducts] = useState([]);
-    const { marca } = useParams();
+    const { brand } = useParams();
 
     useEffect(()=>{
         const db = getFirestore()
         const queryCollection = collection(db, "products")
         
-        if (marca){
-            const queryFilter = query(queryCollection, where("marca", "==", marca.toLowerCase()))
+        if (brand){
+            const queryFilter = query(queryCollection, where("marca", "==", brand.toLowerCase()))
             getDocs(queryFilter)
             .then(resp => setProducts(resp.docs.map(prod => ({id: prod.id, ...prod.data()}))))
             .catch((err) =>  {
@@ -36,7 +36,7 @@ const ItemListContainer = () => {
             });
         }
         
-    }, [marca])
+    }, [brand])
 
     return <div>
                 {<ItemList products={products} />}

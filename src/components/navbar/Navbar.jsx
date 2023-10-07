@@ -8,10 +8,10 @@ const Navbar = () => {
             <nav>
             <ul>
                 <li><Link to="/">Inicio</Link></li>
-                <li><Link to="/marca/iphone">Iphone</Link></li>
-                <li><Link to="/marca/xiaomi">Xiaomi</Link></li>
-                <li><Link to="/marca/samsung">Samsung</Link></li>
-                <li><Link to="/contacto">Contacto</Link></li>
+                <li><Link to="/brand/iphone">Iphone</Link></li>
+                <li><Link to="/brand/xiaomi">Xiaomi</Link></li>
+                <li><Link to="/brand/samsung">Samsung</Link></li>
+                <li><Link to="/contact">Contacto</Link></li>
                 <Cart className="cart"/>
             </ul>
             </nav>

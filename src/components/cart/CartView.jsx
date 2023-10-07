@@ -108,16 +108,16 @@ const CartView = () => {
                         <h3><strong>El carrito está vacío</strong></h3>
                     ) : (
                         <>
-                            <ul>
+                            <ul className="cart-list">
                                 {cartList.map((product) => (
-                                    <li key={product.id}>
+                                    <li  key={product.id}>
                                         {product.modelo} - Cantidad: {product.quantity} - Precio: $
                                         {product.precio * product.quantity}
                                         <button onClick={() => handleRemoveProduct(product.id)}>Eliminar</button>
                                     </li>
                                 ))}
                             </ul>
-                            <p className="cart-view">Total de artículos: {getTotalItems()}</p>
+                            <h3><u>Total de artículos</u>: {getTotalItems()}</h3>
                             <p className="cart-view">Total a pagar: ${getTotalPrice()}</p>
                             <button onClick={() => setShowCheckout(true)}>Finalizar compra</button>
                             <button onClick={handleClearCart}>Vaciar Carrito</button>
@@ -127,18 +127,24 @@ const CartView = () => {
             ) : (
                 <div>
                     <h3>Resumen de la Compra</h3>
-                    <ul>{}</ul>
+                    <ul className="cart-list">
+                                {cartList.map((product) => (
+                                    <li  key={product.id}>
+                                        Bateria para {product.modelo} - Cantidad: {product.quantity} 
+                                    </li>
+                                ))}
+                            </ul>
                     <h3>Total a pagar: ${getTotalPrice() || 0}</h3>
-                    <form className="contenedor-form">
-                        <label> Nombre:{" "}
+                    <form className="form">
+                        <label className="form-label"> Nombre:{" "}
                             <input placeholder="Ingrese su nombre" type="text" value={formData.name} onChange={handleNameChange} required/>
                         </label>
                         <br />
-                        <label> Teléfono:{" "}
+                        <label className="form-label"> Teléfono:{" "}
                             <input placeholder="Ingrese su teléfono" type="number" value={formData.phone} onChange={handlePhoneChange} required/>
                         </label>
                         <br />
-                        <label> Correo Electrónico:{" "}
+                        <label className="form-label"> Correo Electrónico:{" "}
                             <input placeholder="Ingrese su email" type="email" value={formData.email} onChange={handleEmailChange} required/>
                         </label>
                         <br />

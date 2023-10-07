@@ -15,11 +15,6 @@
   background-color: #242424;
 }
 
-.cart-view{
-  font-size: 1.8rem;
-  text-decoration: underline;
-  font-weight: bold;
-}
 
 h2 {
   font-size: xx-large;
@@ -48,9 +43,10 @@ ul {
   display: flex;
   align-items:center;
   background-color: #213547;
-  gap: 20px;
+  gap: 15px;
   margin: 0;
   border-radius: 8px;
+  padding: 5px 20px 5px 20px;
 }
 
 li{
@@ -58,6 +54,18 @@ li{
   font-size: 1.3rem;
   list-style: none;
 }
+
+.form-label{
+  font-size: 1.3rem;
+}
+
+form{
+  width: 60%;
+  margin: 0 auto;
+  padding: 10px;
+
+}
+
 .cart-container {
   position: relative;
 }
@@ -66,6 +74,18 @@ li{
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.cart-list{
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cart-view{
+  font-size: 1.8rem;
+  text-decoration: underline;
+  font-weight: bold;
+  
 }
 
 body {
@@ -102,14 +122,14 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-.productos {
+.products {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   padding-block: 2rem;
 }
 
-.producto {
+.product {
   display: flex;
   flex-direction: column;
   border-radius: 2rem;
@@ -129,14 +149,14 @@ button:focus-visible {
 }
 
 
-.producto > img {
+.product > img {
   width: 100%;
   height: auto;;
   border-radius: 2rem;
 
 }
 
-.ver-mas{
+.more{
   text-decoration: none;
   color: white;
   transition: .2s;
@@ -147,7 +167,7 @@ button:focus-visible {
   background-color: #1a1a1a;
 }
 
-.producto .ver-mas:hover {
+.product .more:hover {
   background-color: black;
   color: white;
 }
