@@ -51,19 +51,24 @@ const CartView = () => {
                     await updateDoc(docRef, { stock: newStock });
                 }
             }
+            clearCart();
+            Swal.fire({
+                title: "Compra finalizada!",
+                text: "¡Gracias por tu compra!",
+                icon: "success",
+                confirmButtonText: "OK"
+            }).then(() => {
+                navigate("/");
+            });
         } catch (error) {
             console.error("Error actualizando el stock en Firestore:", error);
+            Swal.fire({
+                title: "Error",
+                text: "Hubo un problema al procesar la compra. Por favor, inténtalo de nuevo.",
+                icon: "error",
+                confirmButtonText: "OK"
+            });
         }
-
-        clearCart();
-        Swal.fire({
-            title: "Compra finalizada!",
-            text: "¡Gracias por tu compra!",
-            icon: "success",
-            confirmButtonText: "OK"
-        }).then(() => {
-            navigate("/");
-        });
     };
 
     const handleClearCart = () => {
@@ -80,19 +85,19 @@ const CartView = () => {
     const handleRemoveProduct = (productId) => {
         Swal.fire({
             title: "¿Estás seguro?",
-            text: "Esta acción eliminará el producto del carrito.",
+            text: "Esta acción quitará el producto del carrito.",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Sí, eliminarlo",
+            confirmButtonText: "Sí, quitarlo",
             cancelButtonText: "Cancelar"
         }).then((result) => {
             if (result.isConfirmed) {
                 removeProduct(productId);
                 Swal.fire(
                     "Eliminado",
-                    "El producto ha sido eliminado del carrito.",
+                    "El producto ha sido quitado del carrito.",
                     "success"
                 );
             }
@@ -111,8 +116,7 @@ const CartView = () => {
                             <ul className="cart-list">
                                 {cartList.map((product) => (
                                     <li  key={product.id}>
-                                        {product.modelo} - Cantidad: {product.quantity} - Precio: $
-                                        {product.precio * product.quantity}
+                                        Bateria para {product.modelo} - Cantidad: {product.quantity} - Precio: $ {product.precio * product.quantity}
                                         <button onClick={() => handleRemoveProduct(product.id)}>Eliminar</button>
                                     </li>
                                 ))}

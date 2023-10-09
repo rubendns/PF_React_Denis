@@ -9,7 +9,7 @@ const CartWidget = () => {
     <div className="nav-item">
       <button>
         <Link to="/cart-view" >
-        <i></i> Ir al carrito 🛒 | {cartList.length}
+          Ir al carrito 🛒 | {cartList.length}
       </Link>
       </button>
     </div>
