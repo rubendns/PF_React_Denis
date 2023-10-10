@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useCartContext } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
-import { doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
-import Swal from 'sweetalert2';
+import { doc, getDoc, getFirestore, updateDoc, collection, addDoc} from "firebase/firestore";
+import Swal from "sweetalert2";
 
 const CartView = () => {
     const navigate = useNavigate();
@@ -42,6 +42,22 @@ const CartView = () => {
     const handleCheckout = async () => {
         try {
             const db = getFirestore();
+            const orderData = {
+                buyer: {
+                    name: formData.name,
+                    phone: formData.phone,
+                    email: formData.email,
+                },
+                items: cartList.map((prod) => ({
+                    id: prod.id,
+                    title: `Bateria para ${prod.modelo}`,
+                    price: prod.precio,
+                    quantity: prod.quantity,
+                })),
+                total: getTotalPrice(),
+            };
+            const ordersCollection = collection(db, "orders");
+            const orderRef = await addDoc(ordersCollection, orderData);
             for (const product of cartList) {
                 const docRef = doc(db, "products", product.id);
                 const docSnap = await getDoc(docRef);
@@ -54,23 +70,23 @@ const CartView = () => {
             clearCart();
             Swal.fire({
                 title: "Compra finalizada!",
-                text: "¡Gracias por tu compra!",
+                html:`¡Gracias por tu compra! Tu número de orden es: <b>${orderRef.id}</b>`,
                 icon: "success",
-                confirmButtonText: "OK"
+                confirmButtonText: "OK",
             }).then(() => {
                 navigate("/");
             });
         } catch (error) {
-            console.error("Error actualizando el stock en Firestore:", error);
+            console.error("Error al procesar la compra:", error);
             Swal.fire({
                 title: "Error",
                 text: "Hubo un problema al procesar la compra. Por favor, inténtalo de nuevo.",
                 icon: "error",
-                confirmButtonText: "OK"
+                confirmButtonText: "OK",
             });
         }
     };
-
+        
     const handleClearCart = () => {
         clearCart();
         Swal.fire({
